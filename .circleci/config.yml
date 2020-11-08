@@ -1,0 +1,12 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: node:14.15.0-slim
+      steps:
+        - checkout
+        - run: mkdir build
+        - run: cd build
+        - run: git clone https://github.com/vector-im/element-web --depth 1 --branch v1.7.12
+        - run: yarn build
+        - run: ls -al
