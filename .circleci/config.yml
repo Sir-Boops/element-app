@@ -6,8 +6,7 @@ jobs:
     steps:
       - checkout
       - run: apk add git
-      - run: mkdir build
-      - run: cd build
       - run: git clone https://github.com/vector-im/element-web --depth 1 --branch v1.7.12
+      - run: cd element-web
       - run: yarn build
       - run: ls -al
