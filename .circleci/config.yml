@@ -9,6 +9,7 @@ jobs:
       - run: pip install awscli
       - run: git clone --depth 1 --branch v1.7.12 https://github.com/vector-im/element-web
       - run: cd element-web && yarn install && yarn build
+      - run: cp config.json element-web/webapp
       - run: aws s3 sync element-web/webapp s3://element-sergal --acl public-read
       - run: sed -i "s/commit/$(git rev-parse HEAD)/" .circleci/inv-batch.json
       - run: aws cloudfront create-invalidation --distribution-id E2S7XXAD8Y7YH9 --invalidation-batch file://.circleci/inv-batch.json
