@@ -3,13 +3,16 @@ jobs:
   build:
     docker:
       - image: node:14.15.0-alpine
+    enviroment:
+      ELE_VERSION: 1.7.13
     steps:
       - checkout
       - run: apk add git python2 py2-pip pkgconf pixman-dev cairo-dev pango-dev make g++ libjpeg-turbo-dev
       - run: pip install awscli
-      - run: git clone --depth 1 --branch v1.7.13 https://github.com/vector-im/element-web
+      - run: git clone --depth 1 --branch v${ELE_VERSION} https://github.com/vector-im/element-web
       - run: cd element-web && yarn install && yarn build
-      - run: cp config.json element-web/webapp
+      - run: cp files/* element-web/webapp
+      - run: echo ${ELE_VERSION} > element-web/webapp
       - run: aws s3 sync element-web/webapp s3://element-sergal --acl public-read
       - run: sed -i "s/commit/$(git rev-parse HEAD)/" .circleci/inv-batch.json
       - run: aws cloudfront create-invalidation --distribution-id E2S7XXAD8Y7YH9 --invalidation-batch file://.circleci/inv-batch.json
