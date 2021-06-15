@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: node:14.17.1-alpine
+      - image: node:14.17.0-alpine
     environment:
       ELE_VERSION: 1.7.30
     steps:
