@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: node:14.17.0-alpine
     environment:
-      ELE_VERSION: 1.7.30
+      ELE_VERSION: 1.7.34
     steps:
       - checkout
       - run: apk add git python2 py2-pip pkgconf pixman-dev cairo-dev pango-dev make g++ libjpeg-turbo-dev
