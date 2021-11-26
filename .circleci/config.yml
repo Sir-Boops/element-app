@@ -7,7 +7,7 @@ jobs:
       ELE_VERSION: 1.9.5
     steps:
       - checkout
-      - run: apk add git python2 py2-pip pkgconf pixman-dev cairo-dev pango-dev make g++ libjpeg-turbo-dev
+      - run: apk add git python3 py3-pip pkgconf pixman-dev cairo-dev pango-dev make g++ libjpeg-turbo-dev
       - run: pip install awscli
       - run: git clone --depth 1 --branch v${ELE_VERSION} https://github.com/vector-im/element-web
       - run: cd element-web && yarn install && yarn build
